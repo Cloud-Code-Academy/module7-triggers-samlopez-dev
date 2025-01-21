@@ -22,5 +22,13 @@ trigger AccountTrigger on Account (before insert, after insert) {
         }
     }
     
+    if (Trigger.isBefore && Trigger.isInsert) {
+        for (Account acc : Trigger.new) {
+            if (acc.Phone != null && acc.Website != null && acc.Fax != null) {
+                acc.Rating = 'Hot';
+            }
+        }
+    }
+    
     
 }
