@@ -10,7 +10,7 @@ trigger OpportunityTrigger on Opportunity (before insert, before update, before 
             }
             
             Map<Id, Contact> contactsMap = new Map<Id, Contact>();
-            for (Contact con : [SELECT Id, AccountId, Title FROM Contact WHERE AccountId IN :accountIds AND Title = 'CEO']) {
+            for (Contact con : [SELECT Id, AccountId, Title, FirstName FROM Contact WHERE AccountId IN :accountIds AND Title = 'CEO' ORDER BY FirstName]) {
                 contactsMap.put(con.AccountId, con);
             }
             for (Opportunity opp : Trigger.new) {
